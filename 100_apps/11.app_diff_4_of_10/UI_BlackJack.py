@@ -5,7 +5,7 @@ from dictionary_cards import dictionary_of_cards_packed
 
 
 class UI:
-    cards = cards_packed
+    cards = cards_packed.copy()
     dictionary_of_cards = dictionary_of_cards_packed
 
     user_cards = []

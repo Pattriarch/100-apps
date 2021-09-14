@@ -1,5 +1,6 @@
 from UI_BlackJack import UI
 from art import art
+from dictionary_cards import cards_packed
 
 game_betting = True
 
@@ -16,10 +17,14 @@ if start == 'yes':
         print(f"Your balance = ${Game.Bank}")
         print(f"Your bet = ${Game.Bet}")
         print(f'On the table {Game.Amount_cards} cards')
+
         Game.take_cards_for_user()
         Game.dealer_take_cards()
+
         flag_game = True
         temp = Game.user_score
+        user_blackjack = False
+        computer_blackjack = False
 
         while flag_game:
             print(f"Your cards are: {Game.user_cards} and score = {Game.user_score}")
@@ -30,6 +35,7 @@ if start == 'yes':
                 print()
                 print('Blackjack!')
                 print()
+                user_blackjack = True
                 flag_game = False
             else:
                 what_to_do = input("If you want to hit, type 'hit', if you want to stand, "
@@ -75,30 +81,62 @@ if start == 'yes':
                     print("You've choose wrong command!")
 
         Game.dealer_takes_second_card()
-        Game.dealer_takes_cards()
 
-        if Game.user_score > Game.deal_score:
-            print(f"Your score - {temp}, dealer score - {Game.deal_lose_score}")
-            print('You won!')
+        if Game.deal_score == 21:
+            print()
+            print('Computer got blackjack!')
+            print()
+            computer_blackjack = True
 
-            Game.Bank += Game.Bet
+        if user_blackjack and computer_blackjack == False:
+            print('Blackjack! You won!')
+            Game.Bank += round(Game.Bet*1.5)
             Game.obnulate()
 
-        elif Game.user_score == Game.deal_score:
-            print(f"Your score - {temp}, dealer score - {Game.deal_lose_score}")
-            print('Draw')
-
+        elif user_blackjack and computer_blackjack:
+            print('Both blackjack! Draw.')
             Game.obnulate()
 
-        else:
-            print(f"Dealer score - {Game.deal_score}, you lost, because your "
-                  f"score - {temp} ")
-
+        elif user_blackjack == False and computer_blackjack:
+            print('Computer got Blackjack! You lost.')
             Game.Bank -= Game.Bet
             Game.obnulate()
 
+        else:
+            Game.dealer_takes_cards()
+
+        if computer_blackjack == False and user_blackjack == False:
+            if Game.user_score > Game.deal_score:
+                print(f"Your score - {temp}, dealer score - {Game.deal_lose_score}")
+                print('You won!')
+
+                Game.Bank += Game.Bet
+                Game.obnulate()
+
+            elif Game.user_score == Game.deal_score:
+                print(f"Your score - {temp}, dealer score - {Game.deal_lose_score}")
+                print('Draw')
+
+                Game.obnulate()
+
+            else:
+                print(f"Dealer score - {Game.deal_score}, you lost, because your "
+                      f"score - {temp} ")
+
+                Game.Bank -= Game.Bet
+                Game.obnulate()
+
 
     while game_betting:
+
+        if Game.Amount_cards > 40:
+            pass
+        else:
+            print('Shuffling')
+            Game.cards = cards_packed.copy()
+            Game.Amount_cards = len(Game.cards)
+            print(cards_packed)
+
         if Game.Bank >= 5:
             pass
         else:
