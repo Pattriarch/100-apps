@@ -1,8 +1,4 @@
 from art import logo
-from funcs_dict import add
-from funcs_dict import substract
-from funcs_dict import multiply
-from funcs_dict import divide
 from funcs_dict import operations
 
 def calculator():
