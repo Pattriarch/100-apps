@@ -4,25 +4,12 @@ from Menu_profit_and_resources import resources
 profit = 0
 
 
-
 def check_resources(user_decide):
-    if resources["water"] > MENU[user_decide]["ingredients"]["water"]:
-        pass
-    else:
-        return print("Sorry, there's not enough water.")
-    if "milk" in MENU[user_decide]["ingredients"]:
-        if resources["milk"] >= MENU[user_decide]["ingredients"]["milk"]:
-            pass
-        else:
-            return print("Sorry, there's not enough milk.")
-    else:
-        pass
-    if resources["coffee"] >= MENU[user_decide]["ingredients"]["coffee"]:
-        pass
-    else:
-        return print("Sorry, there's not enough coffee.")
+    for item in user_decide:
+        if resources[item] < user_decide[item]:
+            print(f"Sorry, there's not enough {item}.")
+            return False
     return True
-
 
 def spend_resources(user_decide):
     if "milk" in MENU[user_decide]["ingredients"]:
@@ -31,25 +18,28 @@ def spend_resources(user_decide):
     resources["coffee"] -= MENU[user_decide]["ingredients"]["coffee"]
 
 
-def coins(user_decide):
+def coins():
     print("Please insert coins.")
     quarters = int(input("How many quarters?: "))
     dimes = int(input("How many dimes?: "))
     nickles = int(input("How many nickles?: "))
     pennies = int(input("How many pennies?: "))
-    user_money = quarters * 0.25 + dimes * 0.1 + nickles * 0.05 + pennies * 0.01
-    if user_money >= MENU[user_decide]["cost"]:
-        change = user_money - MENU[user_decide]["cost"]
+    return quarters * 0.25 + dimes * 0.1 + nickles * 0.05 + pennies * 0.01
+
+def successful_payment(money, user_drink):
+    if money >= user_drink:
+        change = money - user_drink
         global profit
-        profit += MENU[user_decide]["cost"]
-        if user_money > MENU[user_decide]["cost"]:
+        profit += user_drink
+        if money > user_drink:
             print(f"Here is ${round(change, 2)} in change.")
         else:
             print('No change.')
         pass
+        return True
     else:
         print("Sorry that's not enough money. Money refunded.")
-        return True
+        return False
 
 
 turn_on = True
@@ -66,9 +56,12 @@ while turn_on:
         global turn_off
         turn_on = False
     else:
-        status_resources = check_resources(decide)
+        drink = MENU[decide]
+        drink_price = MENU[decide]["cost"]
+        status_resources = check_resources(drink["ingredients"])
         if status_resources:
-            status_coins = coins(decide)
-            if not status_coins:
+            user_paid = coins()
+            status_pay = successful_payment(user_paid, drink_price)
+            if status_pay:
                 spend_resources(decide)
                 print(f"Here is your {decide} ☕. Enjoy! ")
