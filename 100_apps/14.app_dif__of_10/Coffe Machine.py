@@ -1,6 +1,7 @@
 from Menu_profit_and_resources import MENU
 from Menu_profit_and_resources import resources
 
+
 profit = 0
 
 
