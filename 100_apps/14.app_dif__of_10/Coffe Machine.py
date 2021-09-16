@@ -4,6 +4,7 @@ from Menu_profit_and_resources import resources
 profit = 0
 
 
+
 def check_resources(user_decide):
     if resources["water"] > MENU[user_decide]["ingredients"]["water"]:
         pass
