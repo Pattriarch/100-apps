@@ -36,7 +36,8 @@ while game_is_on:
 
     if ball.ycor() > 280 or ball.ycor() < -280:
         ball.bounce_y()
-    if (ball.xcor() > 450 and ball.distance(second_user_paddle) < 50) or (ball.xcor() < -450 and ball.distance(user_paddle) < 50):
+    if (ball.xcor() > 450 and ball.distance(second_user_paddle) < 50) or \
+            (ball.xcor() < -450 and ball.distance(user_paddle) < 50):
         ball.bounce_x()
         ball.faster()
     if ball.xcor() > 480:
@@ -51,6 +52,5 @@ while game_is_on:
         ball.goal()
         ball.move_speed = 0.03
         turtle.tracer(1)
-
 
 screen.exitonclick()

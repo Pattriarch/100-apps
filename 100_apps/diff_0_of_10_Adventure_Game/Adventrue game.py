@@ -32,9 +32,9 @@ if choice_1 == 'left':
         if choice_3 == 'red':
             print("It's a room full of fire. Game Over.")
         elif choice_3 == "yellow":
-             print("You found the treasure! You Win!")
+            print("You found the treasure! You Win!")
         elif choice_3 == "blue":
-              print("You enter a room of beasts. Game Over.")
+            print("You enter a room of beasts. Game Over.")
     else:
         print("You get attacked by an angry trout. Game Over.")
 else:

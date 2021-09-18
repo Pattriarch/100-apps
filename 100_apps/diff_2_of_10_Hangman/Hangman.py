@@ -20,7 +20,7 @@ life_count = 6
 container = []
 q = False
 
-while end_of_game == False:
+while not end_of_game:
     guess = input('Guess a letter: ')
     if guess in container:
         print('You\'ve already choose this letter!')
@@ -40,7 +40,7 @@ while end_of_game == False:
         # print(stages[life_count])
 
     if life_count == 0:
-        print('You lost all of your lifes')
+        print('You lost all of your lives')
         end_of_game = True
 
     print(f"{' '.join(word_to_answer)}")

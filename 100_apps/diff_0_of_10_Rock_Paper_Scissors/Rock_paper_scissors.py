@@ -1,5 +1,4 @@
 import random
-from random import choice
 
 choose = int(input('What do you choose? Type 0 for Rock, 1 for Paper or 2 for Scissors.\n'))
 comp_peek = random.randint(0, 2)
@@ -35,9 +34,11 @@ game_pictures = [rock, paper, scissors]
 
 print(f'Your choice is:\n {game_pictures[choose]}')
 
+
 def print_opponent_choice():
     print('Your opponent choice is:')
     print(game_pictures[comp_peek])
+
 
 if choose == comp_peek:
     print_opponent_choice()
