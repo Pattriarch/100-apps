@@ -30,4 +30,3 @@ class Scoreboard(Turtle):
     def level_gone(self):
         self.goto(0, 0)
         self.write(f"Level passed.", align=ALIGNMENT, font=FONT_ADDITIONAL)
-

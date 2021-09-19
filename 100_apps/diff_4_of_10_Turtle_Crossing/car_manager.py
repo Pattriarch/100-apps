@@ -6,7 +6,7 @@ STARTING_MOVE_DISTANCE = 5
 MOVE_INCREMENT = 10
 
 
-class CarManager():
+class CarManager:
     def __init__(self):
         self.all_cars = []
         self.speed = STARTING_MOVE_DISTANCE
@@ -29,6 +29,3 @@ class CarManager():
 
     def level_up(self):
         self.speed += MOVE_INCREMENT
-
-
-
